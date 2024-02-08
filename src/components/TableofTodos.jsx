@@ -137,6 +137,71 @@ const TableofTodos = () => {
           </div>
         </div>
       </div>
+      <div className="my-5">
+        <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-4">
+          <div className="overflow-hidden p-3 rounded-lg ring-inset ring-pink-200 ring-1 bg-pink-50/50 w-60">
+            <div className="absolute rounded-md bg-pink-100 p-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-tools stroke-pink-500"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" />
+                <path d="M14.5 5.5l4 4" />
+                <path d="M12 8l-5 -5l-4 4l5 5" />
+                <path d="M7 8l-1.5 1.5" />
+                <path d="M16 12l5 5l-4 4l-5 -5" />
+                <path d="M16 17l-1.5 1.5" />
+              </svg>
+            </div>
+            <dt className="ml-14 truncate text-sm font-medium text-slate-400">
+              Total Tasks
+            </dt>
+            <dd className="ml-14 flex items-baseline -mt-1">
+              <p className="text-2xl truncate font-semibold text-slate-600">
+                {todos.length}
+              </p>
+            </dd>
+          </div>
+
+          <div className="overflow-hidden p-3 rounded-lg ring-inset ring-indigo-200 ring-1 bg-indigo-50/50 w-60">
+            <div className="absolute rounded-md bg-indigo-100 p-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-currency-dollar stroke-indigo-500"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />
+                <path d="M12 3v3m0 12v3" />
+              </svg>
+            </div>
+            <dt className="ml-14 truncate text-sm font-medium text-slate-400">
+              Completed Task
+            </dt>
+            <dd className="ml-14 flex items-baseline -mt-1">
+              <p className="text-2xl truncate font-semibold text-slate-600">
+                {todos.length}
+              </p>
+            </dd>
+          </div>
+        </dl>
+      </div>
     </div>
   );
 };
