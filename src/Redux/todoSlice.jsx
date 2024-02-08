@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
 const todoSlice = createSlice({
-  name: "todo",
+  name: "todos",
   initialState: {
     todos: JSON.parse(localStorage.getItem("todos"))
       ? JSON.parse(localStorage.getItem("todos"))
