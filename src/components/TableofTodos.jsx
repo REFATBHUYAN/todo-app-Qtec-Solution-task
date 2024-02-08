@@ -276,7 +276,7 @@ const TableofTodos = () => {
             </dt>
             <dd className="ml-14 flex items-baseline -mt-1">
               <p className="text-2xl truncate font-semibold text-slate-600">
-                {todos.length}
+                {todos.filter(todo => todo.status === "Completed").length}
               </p>
             </dd>
           </div>
