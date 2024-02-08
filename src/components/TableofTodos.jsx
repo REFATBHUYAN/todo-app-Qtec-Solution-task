@@ -1,19 +1,40 @@
-const todos = [
-  {
-    task: "react course",
-    status: "Pending",
-  },
-  {
-    task: "next course",
-    status: "Pending",
-  },
-  {
-    task: "node course",
-    status: "Pending",
-  },
-];
+// const todos = [
+//   {
+//     task: "react course",
+//     status: "Pending",
+//   },
+//   {
+//     task: "next course",
+//     status: "Pending",
+//   },
+//   {
+//     task: "node course",
+//     status: "Pending",
+//   },
+// ];
+
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo, deleteTodo, editTodo, selectTodos, updateTodo } from "../Redux/todoSlice";
+import { useState } from "react";
 
 const TableofTodos = () => {
+  const { todos } = useSelector(selectTodos);
+  const dispatch = useDispatch();
+  const [text, setText] = useState("");
+  const [i , setI] = useState() ;
+
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (text.trim()) {
+      dispatch(editTodo({index: i, task: text}));
+      setText("");
+      alert("Edit task Success!");
+    }
+  };
   return (
     <div className="container mx-auto">
       <h1 className="text-xl text-center mx-auto w-full font-bold my-10 text-green-800 hover:text-green-900">
@@ -81,7 +102,10 @@ const TableofTodos = () => {
 
                     <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-3 h-10">
                       <div className="flex gap-2">
-                        <button className="py-1.5 px-1.5 rounded-md bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ease-in duration-75 font-semibold text-white hover:text-white">
+                        <button
+                          onClick={() => dispatch(updateTodo(todo?.task))}
+                          className="py-1.5 px-1.5 rounded-md bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ease-in duration-75 font-semibold text-white hover:text-white"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-circle-check"
@@ -99,7 +123,12 @@ const TableofTodos = () => {
                             <path d="M9 12l2 2l4 -4" />
                           </svg>
                         </button>
-                        <button className="py-1.5 px-1.5 rounded-md bg-rose-400 hover:bg-rose-500 active:bg-rose-600 ease-in duration-75 font-semibold text-white hover:text-white">
+                        <button
+                          onClick={() =>
+                            document.getElementById(todo?.task).showModal()
+                          }
+                          className="py-1.5 px-1.5 rounded-md bg-rose-400 hover:bg-rose-500 active:bg-rose-600 ease-in duration-75 font-semibold text-white hover:text-white"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-edit"
@@ -118,7 +147,10 @@ const TableofTodos = () => {
                             <path d="M16 5l3 3" />
                           </svg>
                         </button>
-                        <button className="py-1.5 px-1.5 rounded-md bg-red-400 hover:bg-red-500 active:bg-red-600 ease-in duration-75 font-semibold text-white hover:text-white">
+                        <button
+                          onClick={() => dispatch(deleteTodo(todo?.task))}
+                          className="py-1.5 px-1.5 rounded-md bg-red-400 hover:bg-red-500 active:bg-red-600 ease-in duration-75 font-semibold text-white hover:text-white"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-trash"
@@ -140,6 +172,35 @@ const TableofTodos = () => {
                           </svg>
                         </button>
                       </div>
+                      <dialog id={todo?.task} className="modal">
+                        <div className="modal-box text-left bg-white">
+                          <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                              ✕
+                            </button>
+                          </form>
+                          <h3 className="font-bold text-lg">Edit Your Task</h3>
+                          <form
+                            onSubmit={handleSubmit}
+                            className="flex container mx-auto gap-1 my-10"
+                          >
+                            <input
+                              onChange={(e) => {setText(e.target.value); setI(i)}}
+                              defaultValue={todo.task}
+                              
+                              type="text"
+                              className="block p-2.5 w-96 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
+                            />
+                            <button
+                              type="submit"
+                              className="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition"
+                            >
+                              Edit Task
+                            </button>
+                          </form>
+                        </div>
+                      </dialog>
                     </td>
                   </tr>
                 ))}
